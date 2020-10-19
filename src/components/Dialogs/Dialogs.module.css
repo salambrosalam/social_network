@@ -1,0 +1,20 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogs_items .dialog_item{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    grid-template-columns: 1fr;
+}
+.dialogs_items .active{
+    color: goldenrod;
+}
+
+.messages{
+    padding: 10px;
+}
+.message_item{
+    padding: 10px;
+}

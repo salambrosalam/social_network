@@ -1,0 +1,13 @@
+.userIcon{
+    width: 75px;
+    height: 75px;
+    border-radius: 15px;
+}
+
+.selectedPage{
+    font-weight: bold;
+    cursor: pointer;
+}
+.page{
+    cursor:pointer;
+}

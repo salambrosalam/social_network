@@ -1,0 +1,18 @@
+.bg{
+    display: flex;
+    flex-direction: row;
+    background: #282c34;
+    padding-top: 10px;
+    color:white;
+}
+.nav{
+    grid-area: n;
+    background: red;
+}
+.item a{
+    color: white;
+    text-decoration: none;
+}
+.item a.active{
+    color: goldenrod;
+}
