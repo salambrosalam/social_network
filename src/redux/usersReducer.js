@@ -1,4 +1,3 @@
-import hacker from "../media/hacker.jpg"
 import {usersAPI} from "../api/api";
 
 const FOLLOW = "FOLLOW";
@@ -16,7 +15,8 @@ const initialState = {
     totalUsersCount: 19,
     currentPage: 2,
     isFetching: true,
-    followingInProgress: []
+    followingInProgress: [],
+    pagePortionSize: 10
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -125,37 +125,35 @@ export const setIsFetchingActionCreator = (isFetching) => {
 }
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setIsFetchingActionCreator(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPageActionCreator(currentPage))
+        let response = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setIsFetchingActionCreator(false));
-            dispatch(setUsersActionCreator(data.items));
-            dispatch(setTotalUsersCountActionCreator(data.totalCount));
-        });
+            dispatch(setUsersActionCreator(response.data.items));
+            dispatch(setTotalUsersCountActionCreator(response.data.totalCount))
     }
 }
 
 export const followThunkCreator = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgressActionCreator(true, userId));
-        usersAPI.followUsers(userId).then(data => {
-            if (data.resultCode === 0) {
+        let response = await usersAPI.followUsers(userId)
+            if (response.data.resultCode === 0) {
                 dispatch(followActionCreator(userId));
             }
             dispatch(toggleFollowingProgressActionCreator(false, userId));
-        })
     }
 }
 
 export const UNfollowThunkCreator = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgressActionCreator(true, userId));
-        usersAPI.UNfollowUsers(userId).then(data => {
-            if (data.resultCode === 0) {
+        let response = await usersAPI.UNfollowUsers(userId)
+            if (response.data.resultCode === 0) {
                 dispatch(unfollowActionCreator(userId));
             }
             dispatch(toggleFollowingProgressActionCreator(false, userId));
-        })
     }
 }
 

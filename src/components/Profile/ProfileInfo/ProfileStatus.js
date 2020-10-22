@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "../../Loader/Loader";
 
 class ProfileStatus extends React.Component {
 

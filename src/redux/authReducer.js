@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case SET_USER_DATA:
             return {
                 ...state,
@@ -23,45 +23,42 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setUserDataActionCreator = (userId, login, email, isAuth) => {
-    return{
+    return {
         type: SET_USER_DATA,
         payload: {
-            userId,login,email, isAuth
+            userId, login, email, isAuth
         }
     }
 }
 
 export const authoriseMeThunkCreator = () => {
-    return (dispatch) => {
-        return usersAPI.authoriseMe().then(data => {
-            if(data.resultCode === 0) {
-                let {id, login, email} = data.data;
-                dispatch(setUserDataActionCreator(id,login,email,true));
-            }
-        });
+    return async (dispatch) => {
+        let response = await usersAPI.authoriseMe()
+        if (response.data.resultCode === 0) {
+            let {id, login, email} = response.data.data;
+            dispatch(setUserDataActionCreator(id, login, email, true));
+        }
     }
 }
 
-export const loginThunkCreator = (email,password, rememberMe) => {
-    return (dispatch) => {
-        usersAPI.login(email,password,rememberMe).then(response => {
-            if(response.data.resultCode === 0) {
-                dispatch(authoriseMeThunkCreator())
-            }else{
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-                dispatch(stopSubmit("login", {_error: message}));
-            }
-        });
+export const loginThunkCreator = (email, password, rememberMe) => {
+    return async (dispatch) => {
+        let response = await usersAPI.login(email, password, rememberMe);
+        if (response.data.resultCode === 0) {
+            dispatch(authoriseMeThunkCreator())
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+            dispatch(stopSubmit("login", {_error: message}));
+        }
     }
 }
 
 export const logoutThunkCreator = () => {
-    return (dispatch) => {
-        usersAPI.logout().then(response => {
-            if (response.data.resultCode === 0){
-                dispatch(setUserDataActionCreator(null,null,null,false))
-            }
-        })
+    return async (dispatch) => {
+        let response = await usersAPI.logout()
+        if (response.data.resultCode === 0) {
+            dispatch(setUserDataActionCreator(null, null, null, false))
+        }
     }
 }
 

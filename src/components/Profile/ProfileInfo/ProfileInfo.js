@@ -1,8 +1,6 @@
 import React from "react";
-import back_img from "../../../media/back_img.jpg";
-import raccoon from "../../../media/raccoon.jpg";
 import Loader from "../../Loader/Loader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if(!props.profile){
@@ -28,7 +26,7 @@ const ProfileInfo = (props) => {
         <div>
             <img src={props.profile.photos.large}/>
         </div>
-        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
         <div>
             <div>About me: {props.profile.aboutMe}</div>
         </div>

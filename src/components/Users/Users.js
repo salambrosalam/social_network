@@ -2,29 +2,14 @@ import React from "react";
 import hacker from "../../media/hacker.jpg"
 import classes from "./Users.module.css"
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {usersAPI} from "../../api/api";
+import Paginator from "./Paginator";
 
 let Users = (props) => {
 
-
-    let pagesCount =Math.ceil(props.totalUsersCount/props.pageSize);
-    let pages = [];
-    for(let i=1;i<=pagesCount;i++){
-        pages.push(i)
-    }
-
     return (
         <div>
-            <div>
-                {pages.map((page => {
-                    return (
-                        <span className={(props.currentPage === page) ? classes.selectedPage : classes.page}
-                              onClick={(e) => props.onPageChanged(page)}>{page}</span>
-                    )
-                }))}
-
-            </div>
+           <Paginator currentPage={props.currentPage} totalUsersCount={props.totalUsersCount}
+           pageSize={props.pageSize} onPageChanged={props.onPageChanged} pagePortionSize={props.pagePortionSize} />
             {
                 props.users.map((user) => {
                     return (

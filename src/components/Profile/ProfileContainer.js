@@ -6,8 +6,7 @@ import {
     setUserProfileActionCreator,
     setUsersProfileThunkCreator, updateStatusThunkCreator
 } from "../../redux/profileReducer";
-import {Redirect, withRouter} from "react-router-dom";
-import {usersAPI} from "../../api/api";
+import { withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 

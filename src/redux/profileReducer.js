@@ -4,6 +4,7 @@ export const ADD_POST = "ADD_POST";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_STATUS = "SET_STATUS";
 export const UPDATE_STATUS = "UPDATE_STATUS";
+export const DELETE_POST = "DELETE_POST";
 
 let initialState = {
     posts: [
@@ -27,6 +28,11 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, newPost],
             };
         }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.postId )
+            }
         case SET_USER_PROFILE: {
             return {
                 ...state,
@@ -51,6 +57,13 @@ export let addPostActionCreator = (newPostBody) => {
     }
 }
 
+export let deletePostActionCreator = (postId) => {
+    return {
+        type: DELETE_POST,
+        postId
+    }
+}
+
 export let setUserProfileActionCreator = (profile) => {
     return {
         type: SET_USER_PROFILE,
@@ -66,28 +79,25 @@ export let setStatusActionCreator = (status) => {
 }
 
 export let getStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        usersAPI.getStatus(userId).then(response => {
+    return async (dispatch) => {
+        let response = await usersAPI.getStatus(userId)
             dispatch(setStatusActionCreator(response.data))
-        })
-    }
+        }
 }
 
 export let updateStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        usersAPI.updateStatus(status).then(response => {
+    return async (dispatch) => {
+        let response = await usersAPI.updateStatus(status)
             if (response.data.resultCode === 0){
                 dispatch(setStatusActionCreator(status))
             }
-        })
-    }
+        }
 }
 
 export const setUsersProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        usersAPI.getProfile(userId).then(response => {
+    return async (dispatch) => {
+        let response = await usersAPI.getProfile(userId)
             dispatch(setUserProfileActionCreator(response.data));
-        });
     }
 }
 

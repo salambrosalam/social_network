@@ -9,6 +9,14 @@ import Users from "./Users";
 import Loader from "../Loader/Loader";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 class UsersAPIComponent extends React.Component{
 
@@ -36,20 +44,33 @@ class UsersAPIComponent extends React.Component{
                        followingProgress={this.props.followingProgress}
                        followUsers={this.props.followUsers}
                        unfollowUsers={this.props.unfollowUsers}
+                       pagePortionSize={this.props.pagePortionSize}
                 />
             </>
         )
     }
 }
 
+// let mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingProgress: state.usersPage.followingInProgress
+        isFetching: getIsFetching(state),
+        followingProgress: getFollowingInProgress(state),
+        pagePortionSize: state.usersPage.pagePortionSize
     }
 }
 
