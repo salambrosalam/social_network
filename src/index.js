@@ -5,16 +5,16 @@ import store from "./redux/redux_store";
 import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter >
             <Provider store={store}>
                 <App/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );
