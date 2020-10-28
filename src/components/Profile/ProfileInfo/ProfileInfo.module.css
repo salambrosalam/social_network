@@ -1,0 +1,45 @@
+.avatar{
+    width: 200px;
+    height: 200px;
+}
+.profileHeader{
+
+    width: 100vh;
+    color: white;
+    font-size: 45px;
+    /*background-image:linear-gradient(to right ,darkblue,lightblue) ;*/
+    display: flex;
+    flex-direction: row;
+}
+.fullName{
+    margin-top: 140px;
+}
+.mainInfo{
+    background-color: #282c34;
+    padding: 0px;
+}
+.gridContainer{
+    grid-area: n;
+    background-image:linear-gradient(to right ,darkblue,lightblue) ;
+}
+.status{
+    font-family: Consolas;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+.info{
+    font-family: Consolas;
+    color: white;
+    font-size: 20px;
+}
+.skills{
+    border: black solid 2px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    width: 200px;
+}
+.bold{
+    font-weight: bold;
+}

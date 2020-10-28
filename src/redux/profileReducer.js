@@ -5,6 +5,7 @@ export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_STATUS = "SET_STATUS";
 export const UPDATE_STATUS = "UPDATE_STATUS";
 export const DELETE_POST = "DELETE_POST";
+export const SET_PHOTO = "SET_PHOTO";
 
 let initialState = {
     posts: [
@@ -45,6 +46,12 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
         }
+        case SET_PHOTO: {
+            return{
+                ...state,
+                profile: {...state.profile, photos: action.payload}
+            }
+        }
         default: return state;
     }
 }
@@ -78,6 +85,13 @@ export let setStatusActionCreator = (status) => {
     }
 }
 
+export let setPhotoActionCreator = (photo) => {
+    return {
+        type: SET_PHOTO,
+        payload: photo
+    }
+}
+
 export let getStatusThunkCreator = (userId) => {
     return async (dispatch) => {
         let response = await usersAPI.getStatus(userId)
@@ -98,6 +112,13 @@ export const setUsersProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         let response = await usersAPI.getProfile(userId)
             dispatch(setUserProfileActionCreator(response.data));
+    }
+}
+
+export const savePhotoThunkCreator = (file) => async dispatch => {
+    let response = await usersAPI.savePhoto(file);
+    if (response.data.resultCode === 0){
+        dispatch(setPhotoActionCreator(response.data.data.photos))
     }
 }
 

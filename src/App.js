@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import classes from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
 import {withRouter, Route, Switch} from "react-router-dom";
 import News from "./components/News/News";
@@ -29,10 +29,10 @@ class App extends React.Component {
             return <Loader/>
         }
         return (
-            <div className="app-wrapper">
+            <div className={classes.appWrapper}>
                 <HeaderContainer/>
                 <Navbar/>
-                <div className="app-wrapper-content">
+                <div className={classes.appWrapperContent}>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route exact path="/feed" component={News}/>

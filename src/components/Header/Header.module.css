@@ -1,6 +1,6 @@
 .header{
     grid-area: h;
-    background: green;
+    background: darkgray;
 }
 .header img{
     width: 100px;
@@ -8,4 +8,8 @@
 }
 .loginBlock{
     float: right;
+}
+.item{
+    text-decoration: none;
+    color:white;
 }

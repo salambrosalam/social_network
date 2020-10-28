@@ -7,12 +7,23 @@
 }
 .nav{
     grid-area: n;
-    background: red;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
 }
 .item a{
+    font-size: 25px;
     color: white;
     text-decoration: none;
+}
+.item a:hover{
+    color:green;
 }
 .item a.active{
     color: goldenrod;
 }
+.item:hover{
+    color: green
+}
+

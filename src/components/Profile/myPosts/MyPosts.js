@@ -14,8 +14,7 @@ const PostForm = (props) => {
                    name={"newPostBody"}
                    validate={[requiredField, maxLength30]}
                    placeholder={"enter here your post message"}/>
-            <button onClick={props.addPost}>Add Post</button>
-            <button>Remove</button>
+            <button className={classes.button} onClick={props.addPost}>Add Post</button>
         </form>
     )
 }
@@ -36,7 +35,7 @@ const MyPosts = (props) => {
 
 
     return (
-        <div>
+        <div className={classes.mainInfo}>
             {postElements}
             <ReduxPostForm onSubmit={addNewPost}/>
             <div className={classes.posts}>

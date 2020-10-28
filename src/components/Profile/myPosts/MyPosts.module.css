@@ -1,0 +1,17 @@
+.mainInfo{
+    background-color: #282c34;
+    padding: 0px;
+}
+.button{
+    height: 45px;
+    transition-duration: 0.4s;
+    background-color: rebeccapurple;
+    border-radius: 3px;
+    font-size: 25px;
+    border: none;
+}
+.button:hover {
+    background-color: rebeccapurple; /* Green */
+    color: white;
+    cursor: pointer;
+}

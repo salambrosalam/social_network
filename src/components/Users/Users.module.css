@@ -11,3 +11,23 @@
 .page{
     cursor:pointer;
 }
+.userCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    background-color: white;
+    border: 2px solid black;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+.userCard:hover{
+    cursor: pointer;
+    background-color: grey;
+}
+.userName{
+    text-decoration: none;
+    color: black;
+}

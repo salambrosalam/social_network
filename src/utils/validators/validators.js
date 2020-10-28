@@ -1,9 +1,11 @@
+import React from "react";
+
 export const requiredField = (value) => {
     if(value) {
         return undefined;
     }
 
-    return "field is required";
+    return <div>Field is required</div>;
 }
 
 export const maxLength30 = value => {

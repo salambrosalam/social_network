@@ -13,13 +13,12 @@ let Users = (props) => {
             {
                 props.users.map((user) => {
                     return (
-                        <div key={user.id}>
+                        <NavLink className={classes.userName} to={`/profile/${user.id}`}>
+                        <div className={classes.userCard} key={user.id}>
                             <span>
                                 <div>
-                                    <NavLink to={`/profile/${user.id}`}>
                                         <img src={user.photos.small != null ? user.photos.small : hacker}
                                              className={classes.userIcon}/>
-                                    </NavLink>
                                 </div>
                                 <div>
                                     {user.followed ?
@@ -34,15 +33,12 @@ let Users = (props) => {
                             </span>
                             <span>
                                 <span>
-                                    <div>{user.name}</div>
+                                    <div >{user.name}</div>
                                     <div>{user.status}</div>
-                                </span>
-                                <span>
-                                    <div>{'user.location.city'}</div>
-                                    <div>{'user.location.country'}</div>
                                 </span>
                             </span>
                         </div>
+                        </NavLink>
                     )
                 })
             }

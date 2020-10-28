@@ -1,29 +1,36 @@
 import React from "react";
-import {reduxForm,Field} from "redux-form";
+import {reduxForm, Field} from "redux-form";
 import {Input} from "../FormsControls/FormControls";
 import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 import classes from "../FormsControls/formsControls.module.css"
+import login_img from "../../media/login_img.png";
 
 const Login = (props) => {
-    return (
-            <form onSubmit={props.handleSubmit}>
+    return (<div className={classes.container}>
+            <div className={classes.border}>
+            <form className={classes.container} onSubmit={props.handleSubmit}>
+                <img src={login_img} className={classes.img}/>
                 <div>
+                    <div>Login</div>
                     <Field placeholder="Login"
+                           className={classes.textInput}
                            name={"login"}
                            component={Input}
                            validate={[requiredField]}/>
                 </div>
                 <div>
+                    <div>password</div>
                     <Field placeholder="password"
                            name={"password"}
+                           className={classes.textInput}
                            type={"password"}
                            component={Input}
                            validate={[requiredField]}/>
                 </div>
-                <div>
+                <div >
                     <Field type={"checkbox"} name={"rememberMe"} component={"input"}/>remember me
                 </div>
                 {props.error && <div className={classes.formSummaryError}>
@@ -31,9 +38,11 @@ const Login = (props) => {
                 </div>
                 }
                 <div>
-                    <button>Login</button>
+                    <button className={classes.button}>Login</button>
                 </div>
             </form>
+        </div>
+        </div>
     )
 }
 
@@ -46,13 +55,13 @@ const LoginForm = (props) => {
     const onSubmit = formData => {
         props.login(formData.login, formData.password, formData.rememberMe)
     }
-    if (props.isAuth){
+    if (props.isAuth) {
         debugger;
-        return <Redirect to={"/profile"} />
+        return <Redirect to={"/profile"}/>
     }
 
-    return <div>
-        <h1>Login</h1>
+    return <div className={classes.container }>
+        <h1>Login form</h1>
         <ReduxLoginForm onSubmit={onSubmit}/>
     </div>
 }
@@ -71,4 +80,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
